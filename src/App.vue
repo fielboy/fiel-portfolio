@@ -8,6 +8,6 @@
 
 <script setup>
 
-    import  Index from './components/Index.vue'
+    import Index from './components/Index.vue'
 
 </script>

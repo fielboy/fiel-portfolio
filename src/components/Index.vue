@@ -67,88 +67,108 @@ const scrollToSection = (sectionRef) => {
       
   
       <section ref="homeRef" class="home">
-        <v-card height="500" title="Home"></v-card>
+            <v-card height="500" title="Home">
+                
+            </v-card>
       </section>
   
       <section ref="aboutRef" class="about">
         <v-card height="500" title="About"></v-card>
       </section>
   
-      <section ref="todoListRef" class="todo-list">
-        <v-card title="Todo list app" class="text-center" width="69%" style="margin: auto; margin-top: 5%; margin-bottom: 5%;">
-        <v-card-item>
-            <v-text-field v-model="newTask" @keydown.enter="create" label="What are you working on?">
-            <template v-slot:append-inner>
-                <v-fade-transition>
-                    <v-tooltip text="Creates a new task">
-                        <template v-slot:activator="{ props }">
-                            <v-btn
-                                icon="mdi-plus"
-                                size="x-small"
-                                v-bind="props"
-                                v-show="newTask"
-                                @click="create"
-                            ></v-btn>
+      <section ref="todoListRef" class="todo-list bg-grey-lighten-3 pa-2">
+            <v-card title="Todo list app" class="text-center " width="69%" style="margin: auto; margin-top: 50px; margin-bottom: 50px;">
+                <v-card-item>
+                    <v-text-field v-model="newTask" @keydown.enter="create" label="What are you working on?">
+                        <template v-slot:append-inner>
+                            <v-fade-transition>
+                                <v-tooltip text="Creates a new task">
+                                    <template v-slot:activator="{ props }">
+                                        <v-btn
+                                            icon="mdi-plus"
+                                            size="x-small"
+                                            v-bind="props"
+                                            v-show="newTask"
+                                            @click="create"
+                                        ></v-btn>
+                                    </template>
+                                </v-tooltip>
+                            </v-fade-transition>
                         </template>
-                    </v-tooltip>
-                </v-fade-transition>
-            </template>
-        </v-text-field>
-        <v-divider />
-        <v-row class="mt-3">
-            <v-col cols="4" class="my-2">
-                Remaining: 
-                <v-fade-transition leave-absolute>
-                    <span :key="remainingTasks" class="text-red">
-                        {{ remainingTasks }}
-                    </span>
-                </v-fade-transition>
-            </v-col>
-            <v-divider vertical class="my-2" />
-            <v-col cols="4" class="my-2">
-                Completed: 
-                <v-fade-transition leave-absolute>
-                    <span :key="completedTasks" class="text-success">
-                        {{ completedTasks }}
-                    </span>
-                </v-fade-transition>
-            </v-col>
-            <v-col cols="4">
-                <v-progress-circular v-show="tasks.length > 0" class="me-3 mt-2" color="success" :model-value="(completedTasks / tasks.length) * 100 ">
-                </v-progress-circular>
-            </v-col>
-        </v-row>
-        <v-divider class="mt-5" />
+                    </v-text-field>
+                    <v-divider />
+                    <v-row class="mt-3">
+                        <v-col cols="4" class="my-2">
+                            Remaining: 
+                            <v-fade-transition leave-absolute>
+                                <span :key="remainingTasks" class="text-red">
+                                    {{ remainingTasks }}
+                                </span>
+                            </v-fade-transition>
+                        </v-col>
+                        <v-divider vertical class="my-2" />
+                        <v-col cols="4" class="my-2">
+                            Completed: 
+                            <v-fade-transition leave-absolute>
+                                <span :key="completedTasks" class="text-success">
+                                    {{ completedTasks }}
+                                </span>
+                            </v-fade-transition>
+                        </v-col>
+                        <v-col cols="4">
+                            <v-progress-circular v-show="tasks.length > 0" class="me-3 mt-2" color="success" :model-value="(completedTasks / tasks.length) * 100 ">
+                            </v-progress-circular>
+                        </v-col>
+                    </v-row>
+                    <v-divider class="mt-5" />
 
-        <v-card class="mt-4" v-show="tasks.length > 0">
-            <v-slide-y-transition group>
-                <div v-for="task in tasks" :key="task.task_id">
-                    <v-hover v-slot="{isHovering, props}">
-                        <v-divider />
-                        <v-list-item :class="isHovering ? 'bg-grey-lighten-3' : ''" v-bind="props">
-                            <v-checkbox-btn @click="completeTask(task)" :label="task.name" :class="task.is_completed ? 'text-grey' : 'text-black'">
-                            </v-checkbox-btn>
-                            <template v-slot:append>
-                                <v-fade-transition>
-                                    <v-icon
-                                        color="success"
-                                        v-show="task.is_completed"
-                                    >
-                                        mdi-check
-                                    </v-icon>
-                                </v-fade-transition>
-                            </template>
-                        </v-list-item>
-                    </v-hover>
-                </div>
-            </v-slide-y-transition>
+                <v-card class="mt-4" v-show="tasks.length > 0">
+                    <v-slide-y-transition group>
+                        <div v-for="task in tasks" :key="task.task_id">
+                            <v-hover v-slot="{isHovering, props}">
+                                <v-divider />
+                                <v-list-item :class="isHovering ? 'bg-grey-lighten-3' : ''" v-bind="props">
+                                    <v-checkbox-btn @click="completeTask(task)" :label="task.name" :class="task.is_completed ? 'text-grey' : 'text-black'">
+                                    </v-checkbox-btn>
+                                    <template v-slot:append>
+                                        <v-fade-transition>
+                                            <v-icon
+                                                color="success"
+                                                v-show="task.is_completed"
+                                            >
+                                                mdi-check
+                                            </v-icon>
+                                        </v-fade-transition>
+                                    </template>
+                                </v-list-item>
+                            </v-hover>
+                        </div>
+                    </v-slide-y-transition>
+                </v-card>
+            </v-card-item>
         </v-card>
-        </v-card-item>
-    </v-card>
       </section>
   
       <section ref="contactRef" class="contact">
-        <v-card height="500" title="Contact"></v-card>
+            <v-card height="500" title="Contact">
+                <v-container>
+                    <v-row>
+                    <v-col cols="5">
+                        <p>Contact</p>
+                    </v-col>
+                    <v-col cols="7">
+                        <v-card elevation="0">
+                            <v-card-item>
+                                <v-text-field label="Your name"></v-text-field>
+                                <v-text-field label="Your email"></v-text-field>
+                                <v-textarea label="Your message"></v-textarea>
+                                <v-btn block color="blue">Submit</v-btn>
+                            </v-card-item>
+                        </v-card>
+                    </v-col>
+                </v-row>
+                </v-container>
+            </v-card>
       </section>
   
       <section ref="appRef" class="about">
